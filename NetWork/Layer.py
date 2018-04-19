@@ -4,7 +4,7 @@ from NetWork.ConstNode import *
 
 
 class Layer(object):
-    def __init__(self, node_count, layer_index):
+    def __init__(self, layer_index, node_count):
         """
         init the layer and the node of this layer
         :param node_count:

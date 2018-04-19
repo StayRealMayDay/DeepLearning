@@ -1,7 +1,7 @@
 # -*-coding:utf-8-*-
 
 
-class Connection(object):
+class Connections(object):
     def __init__(self):
         self.connections = []
 
