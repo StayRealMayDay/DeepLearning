@@ -98,3 +98,46 @@ class Network(object):
         self.predict(sample)
         self.calculate_delta(label)
         self.calculate_gradient()
+
+    def gradient_check(self, sample_feature, sample_label):
+        """
+        calculate the network error
+        :param sample_feature:
+        :param sample_label:
+        :return:
+        """
+        """
+        calculate the network error under each weight
+        """
+        newwork_error = lambda vec1, vec2: 0.5 * reduce(lambda a, b: a + b, list(
+            map(lambda v: (v[0] - v[1]) * (v[0] - v[1]), zip(vec1, vec2))))
+        """
+        calculate the gradient with the sample date
+        """
+        self.get_gradient(sample_feature, sample_label)
+        for conn in self.connections.connections:
+            """
+            get the gradient of each connection
+            """
+            actual_gradient = conn.get_gradient()
+            """
+            change a small value of the weight
+            """
+            epsilon = 0.0001
+            conn.weight += epsilon
+            """
+            calculate the error
+            """
+            error1 = newwork_error(self.predict(sample_feature), sample_label)
+            """
+            again
+            """
+            conn.weight -= 2 * epsilon
+            error2 = newwork_error(self.predict(sample_feature), sample_label)
+            """
+            calculate the gradient
+            """
+            expected_gradient = (error2 - error1) / (2 * epsilon)
+
+            print('expected gradient: \t%f\n actual gradient: \t%f' % (
+                expected_gradient, actual_gradient))
