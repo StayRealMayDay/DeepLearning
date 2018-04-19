@@ -3,6 +3,11 @@ import random
 
 
 class Connection(object):
+    """
+    init a connection
+    include a upstream node and a downstream node
+    init the weight with a very small random value
+    """
     def __init__(self, upstream_node, downstream_node):
         self.upstream_node = upstream_node
         self.downstream_node = downstream_node
