@@ -96,7 +96,6 @@ class Perceptron(object):
         self.bias += delata * rate
 
 
-
 def f(x):
     """
     define the active function
@@ -120,6 +119,7 @@ def get_training_dataset():
     """
     labels = [1, 0, 0, 0]
     return input_vecs, labels
+
 
 def train_and_perceptron():
     """
